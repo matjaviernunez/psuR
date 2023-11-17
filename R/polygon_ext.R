@@ -64,7 +64,7 @@ polygon_ext <- function(poly, boundary, id = NULL, gap = NULL, buff = 5, density
         pol <- poly %>%
             filter(id == index[i])
 
-        pol1 <- st_buffer(pol, -gap) %>%
+        pol1 <- st_buffer(pol, -buff) %>%
             summarise()
 
         pol2 <- st_difference(pol, pol1)
