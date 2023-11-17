@@ -19,20 +19,21 @@
 #' large avenues or rivers that run through the city).
 #' @author Angel Gaibor <mat.angel.gaibor at gmail.com>
 #' @author Javier Núñez <mat.javier.nunez at gmail.com>
-#' @param poly an sf polygon object, geographic data of non-adjacent polygons generally related to blocks.
-#' @param boundary an sf polygon object, that limits the area where polygons will be extended.
+#' @param poly a polygon or multi-polygon sf object, geographic data of non-adjacent polygons generally related to blocks.
+#' @param boundary a sf polygon object, that limits the area where polygons will be extended.
 #' @param id a character string, the column name of the ID related to blocks in poly argument, preferably unique by block.
-#' @param gap an multi-polygon sf object, geographic data that represents rivers or boundaries, used to avoid undesired connections between blocks, could be contained within the boundary.
+#' @param gap a multi-polygon sf object, geographic data that represents rivers or boundaries, used to avoid undesired connections between blocks, could be contained within the boundary.
 #' @param buff an integer (buffer width) that determine the quality of the polygon extension. Higher quality requires more processing power.
 #' @param density an integer (number of points by 1 meter) that determine the quality of the polygon extension. Higher quality requires more processing power.
 #'
 #' @references
 #' Gutierrez, H. A. (2009), \emph{Estrategias de muestreo: Diseno de encuestas y estimacion de parametros}. Editorial Universidad Santo Tomas.
 #' Valliant, R, et. al. (2013), \emph{Practical tools for Design and Weighting Survey Samples}. Springer
-#' @return
+#' @return polext
 #' @export
 #'
 #' @examples
+#' polygon_ext(poly, boundary, id = "id", gap = gap, buff = 5, density = 0.1)
 
 polygon_ext <- function(poly, boundary, id = NULL, gap = NULL, buff = 5, density = 0.1){
 

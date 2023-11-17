@@ -17,19 +17,20 @@
 #' the PSU which it belongs.
 #' @author Angel Gaibor <mat.angel.gaibor at gmail.com>
 #' @author Javier Núñez <mat.javier.nunez at gmail.com>
-#' @param A an n_n integer matrix, incidence matrix.
+#' @param A a n_n integer matrix, incidence matrix.
 #' @param W a two column data.frame, contains the id and weights of the adyacent polygons (generally the id and the number of occupied dwellings in each block).
 #' @param lowerLimit an integer, defines the lower limit of the PSU size to be created.
-#' @param idp an character, name of id column in W.
+#' @param idp a character, name of id column in W.
 #' @param weight a character, name of weights column in W.
 #'
 #' @references
 #' Gutierrez, H. A. (2009), \emph{Estrategias de muestreo: Diseno de encuestas y estimacion de parametros}. Editorial Universidad Santo Tomas.
 #' Valliant, R, et. al. (2013), \emph{Practical tools for Design and Weighting Survey Samples}. Springer
-#' @return
+#' @return psu
 #' @export
 #'
 #' @examples
+#' psu_clustering(A, W=weights, lowerLimit=60, idp = "idp", weight = "weight")
 
 psu_clustering <- function(A, W, lowerLimit, idp=NULL, weight){
 

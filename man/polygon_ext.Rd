@@ -7,17 +7,20 @@
 polygon_ext(poly, boundary, id = NULL, gap = NULL, buff = 5, density = 0.1)
 }
 \arguments{
-\item{poly}{an sf polygon object, geographic data of non-adjacent polygons generally related to blocks.}
+\item{poly}{a polygon or multi-polygon sf object, geographic data of non-adjacent polygons generally related to blocks.}
 
-\item{boundary}{an sf polygon object, that limits the area where polygons will be extended.}
+\item{boundary}{a sf polygon object, that limits the area where polygons will be extended.}
 
 \item{id}{a character string, the column name of the ID related to blocks in poly argument, preferably unique by block.}
 
-\item{gap}{an multi-polygon sf object, geographic data that represents rivers or boundaries, used to avoid undesired connections between blocks, could be contained within the boundary.}
+\item{gap}{a multi-polygon sf object, geographic data that represents rivers or boundaries, used to avoid undesired connections between blocks, could be contained within the boundary.}
 
 \item{buff}{an integer (buffer width) that determine the quality of the polygon extension. Higher quality requires more processing power.}
 
 \item{density}{an integer (number of points by 1 meter) that determine the quality of the polygon extension. Higher quality requires more processing power.}
+}
+\value{
+polext
 }
 \description{
 This function allows for extending the polygons prior to the formation of Primary Sampling Units.
@@ -34,6 +37,9 @@ however they can drastically improve the quality of the result.
 
 Using the gap parameter, unwanted incidences between extended polygons can be eliminated (for example,
 large avenues or rivers that run through the city).
+}
+\examples{
+polygon_ext(poly, boundary, id = "id", gap = gap, buff = 5, density = 0.1)
 }
 \references{
 Gutierrez, H. A. (2009), \emph{Estrategias de muestreo: Diseno de encuestas y estimacion de parametros}. Editorial Universidad Santo Tomas.

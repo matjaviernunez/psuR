@@ -7,15 +7,18 @@
 psu_clustering(A, W, lowerLimit, idp = NULL, weight)
 }
 \arguments{
-\item{A}{an n_n integer matrix, incidence matrix.}
+\item{A}{a n_n integer matrix, incidence matrix.}
 
 \item{W}{a two column data.frame, contains the id and weights of the adyacent polygons (generally the id and the number of occupied dwellings in each block).}
 
 \item{lowerLimit}{an integer, defines the lower limit of the PSU size to be created.}
 
-\item{idp}{an character, name of id column in W.}
+\item{idp}{a character, name of id column in W.}
 
 \item{weight}{a character, name of weights column in W.}
+}
+\value{
+psu
 }
 \description{
 This function returns a data.frame object that identifies the adyacent polygons
@@ -30,6 +33,9 @@ same way.
 
 The function returns a vector of identifiers of size n that relates the polygons to
 the PSU which it belongs.
+}
+\examples{
+psu_clustering(A, W=weights, lowerLimit=60, idp = "idp", weight = "weight")
 }
 \references{
 Gutierrez, H. A. (2009), \emph{Estrategias de muestreo: Diseno de encuestas y estimacion de parametros}. Editorial Universidad Santo Tomas.

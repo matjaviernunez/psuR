@@ -7,11 +7,14 @@
 inc_matrix(poly, tol = 10, id = NULL)
 }
 \arguments{
-\item{poly}{an sf polygon object, extended polygons that share a common boundary.}
+\item{poly}{a sf polygon object, extended polygons that share a common boundary.}
 
 \item{tol}{an integer, tolerance in meters.}
 
 \item{id}{a character string, the column name of the ID related to extended polygons, preferably unique by polygon.}
+}
+\value{
+IM
 }
 \description{
 This function returns a binary matrix that represents the binary relation 'polygon i shares a common boundary
@@ -25,6 +28,9 @@ are expected.
 If the intersection length between polygon i and polygon j is greater or equal than tol, then the IM[i, j] = IM[j,i] = 1.
 
 Its important to mention that diag(IM) = 0.
+}
+\examples{
+inc_matrix(poly, tol=10, id=id)
 }
 \references{
 Gutierrez, H. A. (2009), \emph{Estrategias de muestreo: Diseno de encuestas y estimacion de parametros}. Editorial Universidad Santo Tomas.

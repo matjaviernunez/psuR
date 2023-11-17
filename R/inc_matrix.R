@@ -16,7 +16,7 @@
 #' Its important to mention that diag(IM) = 0.
 #' @author Angel Gaibor <mat.angel.gaibor at gmail.com>
 #' @author Javier Núñez <mat.javier.nunez at gmail.com>
-#' @param poly an sf polygon object, extended polygons that share a common boundary.
+#' @param poly a sf polygon object, extended polygons that share a common boundary.
 #' @param id a character string, the column name of the ID related to extended polygons, preferably unique by polygon.
 #' @param tol an integer, tolerance in meters.
 
@@ -24,10 +24,11 @@
 #' @references
 #' Gutierrez, H. A. (2009), \emph{Estrategias de muestreo: Diseno de encuestas y estimacion de parametros}. Editorial Universidad Santo Tomas.
 #' Valliant, R, et. al. (2013), \emph{Practical tools for Design and Weighting Survey Samples}. Springer
-#' @return
+#' @return IM
 #' @export
 #'
 #' @examples
+#' inc_matrix(poly, tol=10, id=id)
 
 inc_matrix <- function(poly, tol=10, id = NULL){
     aux <- poly %>%
