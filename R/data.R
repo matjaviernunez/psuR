@@ -13,6 +13,7 @@
 #' @format A sf polygon object with 1 row and 1 variable
 NULL
 
+
 #' Gap
 #'
 #' An multi-polygon sf object, geographic data that represents rivers or
@@ -30,6 +31,7 @@ NULL
 #' @format A sf multi-polygon object with 1 row and 1 variable
 NULL
 
+
 #' Non-adyacent polygons
 #'
 #' An sf multi-polygon object, geographic data of non-adjacent polygons generally
@@ -46,7 +48,6 @@ NULL
 #' @usage data(poly)
 #' @format A sf multi-polygon object with 249 rows and 2 variables
 NULL
-
 
 
 #' Block weights
