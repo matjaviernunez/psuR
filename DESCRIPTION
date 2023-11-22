@@ -3,8 +3,17 @@ Package: psuR
 Title: Build Primary Sampling Units fom Geographic Data Related to Blocks.
 Version: 1.0.0
 Date: 2023-11-17
-Maintainer: Javier Núñez <mat.javier.nunez@gmail.com>, Angel Gaibor
-    <mat.angel.gaibor@gmail.com>
+Authors@R: c(
+    person(given = "Angel", family = "Gaibor",
+    email = "mat.angel.gaibor@gmail.com", role = c("aut")),
+    person(given = "Javier", family = "Núñez",
+    email = "mat.javier.nunez@gmail.com", role = c("aut", "cre")),
+    person(given = "Andrés", family = "Gutiérrez",
+    email = "andres.gutierrez@cepal.org", role = c("ctb")),
+    person(given = "José", family = "Zea",
+    email = "jfzeac@unal.edu.co", role = c("ctb"))
+    )
+Maintainer: Javier Núñez <mat.javier.nunez@gmail.com>
 Description: A structured process to build Primary Sampling Units (PSU)
     from geographic data linked to blocks specially orientated to
     household surveys.
@@ -18,13 +27,6 @@ Depends:
 Imports: 
     sf,
     tidyverse
-Author@R: person(given = "Angel", family = "Gaibor", email =
-    "mat.angel.gaibor@gmail.com", role = c("aut")) person(given =
-    "Javier", family = "Núñez", email = "mat.javier.nunez@gmail.com", role
-    = c("aut", "cre")) person(given = "Andrés", family = "Gutiérrez",
-    email = "andres.gutierrez@cepal.org", role = c("ctb")) person(given =
-    "José", family = "Zea", email = "jfzeac@unal.edu.co", role = c("aut",
-    "ctb"))
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
