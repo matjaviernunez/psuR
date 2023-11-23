@@ -20,7 +20,7 @@ polygon_ext(poly, boundary, id = NULL, gap = NULL, buff = 5, density = 0.1)
 \item{density}{an integer (number of points by 1 meter) that determine the quality of the polygon extension. Higher quality requires more processing power.}
 }
 \value{
-polext
+ext_pol
 }
 \description{
 This function allows for extending the polygons prior to the formation of Primary Sampling Units.

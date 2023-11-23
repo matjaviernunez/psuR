@@ -30,7 +30,8 @@
 #' @export
 #'
 #' @examples
-#' psu_clustering(A, W=weights, lowerLimit=60, idp = "idp", weight = "weight")
+#' # im is created by running the psuR::inc_matrix function with the parameters set in its example.
+#' psu_clustering(A = im, W=weights, lowerLimit=60, idp = "idp", weight = "weight")
 
 psu_clustering <- function(A, W, lowerLimit, idp=NULL, weight){
 

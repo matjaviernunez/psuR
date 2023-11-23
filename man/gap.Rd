@@ -5,13 +5,13 @@
 \alias{gap}
 \title{Gap}
 \format{
-A sf multi-polygon object with 1 row and 1 variable
+A sf multi-polygon object with 1 row and 1 variable.
 }
 \usage{
 data(gap)
 }
 \description{
-An multi-polygon sf object, geographic data that represents rivers or
+A multi-polygon sf object, geographic data that represents rivers or
 boundaries, used to avoid undesired connections between blocks, could be
 contained within the boundary.
 }

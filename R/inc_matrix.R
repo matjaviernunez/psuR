@@ -4,7 +4,7 @@
 #' @title
 #' Function that builds the incidence matrix (IM)!
 #' @description
-#' This function returns a binary matrix that represents the binary relation 'polygon i shares a common boundary
+#' This function returns a matrix that represents the binary relation 'polygon i shares a common boundary
 #' with polygon j'.
 #' @details
 #' Incidence matrix is computed by the geographical relations between a set of adyacent polygons. The binary
@@ -24,11 +24,12 @@
 #' @references
 #' Gutierrez, H. A. (2009), \emph{Estrategias de muestreo: Diseno de encuestas y estimacion de parametros}. Editorial Universidad Santo Tomas.
 #' Valliant, R, et. al. (2013), \emph{Practical tools for Design and Weighting Survey Samples}. Springer
-#' @return IM
+#' @return im
 #' @export
 #'
 #' @examples
-#' inc_matrix(poly, tol=10, id=id)
+#' # ext_pol is created by running the psuR::polygon_ext function with the parameters set in its example.
+#' inc_matrix(poly = ext_pol, tol=10, id=id)
 
 inc_matrix <- function(poly, tol=10, id = NULL){
     aux <- poly %>%
@@ -51,9 +52,9 @@ inc_matrix <- function(poly, tol=10, id = NULL){
         select(id, .$id) %>%
         as.data.frame()
 
-    IM <- data.matrix(select(o, -id)) %>%
+    im <- data.matrix(select(o, -id)) %>%
         replace(is.na(.), 0)
-    rownames(IM) <- colnames(IM)
+    rownames(im) <- colnames(im)
 
-    return(IM)
+    return(im)
 }

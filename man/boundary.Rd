@@ -5,13 +5,13 @@
 \alias{boundary}
 \title{Boundary}
 \format{
-A sf polygon object with 1 row and 1 variable
+A sf polygon object with 1 row and 1 variable.
 }
 \usage{
 data(boundary)
 }
 \description{
-An sf polygon object, that limits the area where polygons will be extended.
+A sf polygon object, that limits the area where polygons will be extended.
 }
 \details{
 \itemize{

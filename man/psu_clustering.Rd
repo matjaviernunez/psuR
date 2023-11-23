@@ -35,7 +35,8 @@ The function returns a vector of identifiers of size n that relates the polygons
 the PSU which it belongs.
 }
 \examples{
-psu_clustering(A, W=weights, lowerLimit=60, idp = "idp", weight = "weight")
+# im is created by running the psuR::inc_matrix function with the parameters set in its example.
+psu_clustering(A = im, W=weights, lowerLimit=60, idp = "idp", weight = "weight")
 }
 \references{
 Gutierrez, H. A. (2009), \emph{Estrategias de muestreo: Diseno de encuestas y estimacion de parametros}. Editorial Universidad Santo Tomas.

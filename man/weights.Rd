@@ -5,7 +5,7 @@
 \alias{weights}
 \title{Block weights}
 \format{
-A data.frame object with 249 rows and 2 variables
+A data.frame object with 249 rows and 2 variables.
 }
 \usage{
 data(weights)

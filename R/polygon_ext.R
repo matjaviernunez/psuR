@@ -29,7 +29,7 @@
 #' @references
 #' Gutierrez, H. A. (2009), \emph{Estrategias de muestreo: Diseno de encuestas y estimacion de parametros}. Editorial Universidad Santo Tomas.
 #' Valliant, R, et. al. (2013), \emph{Practical tools for Design and Weighting Survey Samples}. Springer
-#' @return polext
+#' @return ext_pol
 #' @export
 #'
 #' @examples
@@ -100,7 +100,8 @@ polygon_ext <- function(poly, boundary, id = NULL, gap = NULL, buff = 5, density
             select(id) %>%
             rbind(quntos_iden)
 
-        print(length(index) - i)
+        # shows the number of remaining polygons to extend
+        # print(length(index) - i)
     }
 
     quntos <- do.call(rbind, quntosi)
@@ -149,7 +150,7 @@ polygon_ext <- function(poly, boundary, id = NULL, gap = NULL, buff = 5, density
             st_cast("MULTIPOLYGON")
     }
 
-    polext <- polext %>%
+    ext_pol <- polext %>%
         rename({{ id }} := id) %>%
         st_as_sf()
     names(polext)[names(polext)==attr(polext, "sf_column")] = "geom"
@@ -157,5 +158,5 @@ polygon_ext <- function(poly, boundary, id = NULL, gap = NULL, buff = 5, density
 
     rm(quntosi, pol, pol1, pol2, quntos1, quntos_iden, points, voronoi, vorpun, dissolve, quntos)
 
-    return(polext)
+    return(ext_pol)
 }
