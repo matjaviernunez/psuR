@@ -36,7 +36,8 @@
 psu_clustering <- function(A, W, lowerLimit, idp=NULL, weight){
 
     W <- W %>%
-        rename(id = {{idp}})
+        rename(id = {{idp}},
+               weight = {{weight}})
 
     B <- A
     s <- W
@@ -97,6 +98,24 @@ psu_clustering <- function(A, W, lowerLimit, idp=NULL, weight){
             join <- rbind(join_02, join_03)
         }
 
+        repeated <- join$node1[join$node1 %in% join$node2]
+
+        while(length(repeated) > 0){
+
+            join <- join %>%
+                mutate(aux1 = case_when(node1 %in% repeated ~ 1,
+                                        T ~ 0),
+                       aux2 = case_when(node2 %in% repeated ~ 1,
+                                        T ~ 0),
+                       repeated = case_when(aux1 == 1 ~ node1,
+                                            T ~ node2)) %>%
+                arrange(sumninc) %>%
+                filter(!duplicated(repeated))
+
+            repeated <- join$node1[join$node1 %in% join$node2]
+
+        }
+
         join <- join %>%
             mutate(node = ifelse(node1 %in% H,node1,node2),
                    nodeb = ifelse(node1==node,node2,node1),
@@ -126,6 +145,11 @@ psu_clustering <- function(A, W, lowerLimit, idp=NULL, weight){
         B[B>=2] <- 1
         diag(B) <- 0
         print(sum(B))
+
+        if(length(repeated) > 0 | n_distinct(join$node1) != dim(join)[1] |
+           n_distinct(join$node2) != dim(join)[1]){
+            B <- 0
+        }
 
     }
 
@@ -214,5 +238,12 @@ psu_clustering <- function(A, W, lowerLimit, idp=NULL, weight){
         left_join(control, by = "zona") %>%
         mutate(psuf = ifelse(psuf == 0 & !is.na(psu1), psu1, psuf)) %>%
         select(id, weight, psu = psuf) %>%
+        rename({{idp}} := id)
+
+    psu <- isolated %>%
+        mutate(psuf = case_when(psuf == 0 & psu == 0 ~ npol,
+                                 psuf == 0 & psu != 0 ~ psu,
+                                 T ~ psuf)) %>%
+        select(id, weight, psuf) %>%
         rename({{idp}} := id)
 }
