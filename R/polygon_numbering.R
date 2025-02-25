@@ -47,7 +47,7 @@ polygon_enumerating <- function(pol, idp = NULL){
     n <- length(x)
 
     if(n>1){
-        A <- inc_matrix(por, tol = 0, id = "id")
+        A <- inc_matrix(pol, tol = 0, id = "id")
         diag(A) <- 0
         com_x <- matrix(0,n,n)
         com_y <- matrix(0,n,n)
