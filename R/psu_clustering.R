@@ -200,19 +200,12 @@ psu_clustering <- function(A, W, lowerLimit, idp=NULL, weight){
         print(sum(isolated$psuf == 0))
     }
 
-    control <- isolated %>%
-        filter(psuf == 0) %>%
-        mutate(zona = substr(id, 7, 9)) %>%
-        group_by(zona) %>%
-        summarise() %>%
-        ungroup() %>%
-        mutate(psu1 = 999999 - row_number() + 1) %>%
-        select(zona, psu1)
-
     psu <- isolated %>%
-        mutate(zona = substr(id, 7, 9)) %>%
-        left_join(control, by = "zona") %>%
-        mutate(psuf = ifelse(psuf == 0 & !is.na(psu1), psu1, psuf)) %>%
-        select(id, weight, psu = psuf) %>%
+        mutate(psuf = case_when(psuf == 0 & psu == 0 ~ npol,
+                                 psuf == 0 & psu != 0 ~ psu,
+                                 T ~ psuf)) %>%
+        select(id, weight, psuf) %>%
         rename({{idp}} := id)
+
+    return(psu)
 }
