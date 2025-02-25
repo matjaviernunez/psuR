@@ -68,8 +68,10 @@ polygon_enumerating <- function(pol, idp = NULL){
 
         while (min(h)==0){
             i=i+1
+            aux <- colSums(rbind(A[h != 0, ],
+                                 rep(0, n)))
 
-            boun <- c(1:dim(A)[2])[A[pol_0,]==1]
+            boun <- c(1:dim(A)[2])[aux >=1]
 
             if(length(boun)!=0){
                 pol_1 <- boun[match(max(com_y[pol_0,boun]),com_y[pol_0,boun])]
