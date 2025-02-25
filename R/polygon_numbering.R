@@ -72,7 +72,7 @@ polygon_enumerating <- function(pol, idp = NULL){
             boun <- c(1:dim(A)[2])[A[pol_0,]==1]
 
             if(length(boun)!=0){
-                pol_1 <- boun[match(max(com_y[pol_0,boun]),pol_y[man_0,boun])]
+                pol_1 <- boun[match(max(com_y[pol_0,boun]),com_y[pol_0,boun])]
             }
             else{
                 pol_1 <- match(max(y),y)
