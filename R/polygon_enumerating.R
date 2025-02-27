@@ -32,30 +32,24 @@
 polygon_enumerating <- function(pol, idp = NULL){
 
     pol <- pol %>%
-        rename(id = {{idp}})
+        rename(id = {{idp}}) |>
+        arrange(id)
 
     centroids <- pol %>%
         st_centroid(.)
 
     x <- as.numeric(st_coordinates(centroids)[,1])
     y <- as.numeric(st_coordinates(centroids)[,2])
-
-    data <- as.data.frame(cbind(x,y)) %>%
-        mutate(x=as.numeric(x),
-               y=as.numeric(y))
-
     n <- length(x)
 
     if(n>1){
-        A <- inc_matrix(pol, tol = 0, id = "id")
+        A <- inc_matrix(pol, tol = 10, id = "id")
+
         diag(A) <- 0
-        com_x <- matrix(0,n,n)
-        com_y <- matrix(0,n,n)
         dis <- matrix(0,n,n)
         for (i in 1:n) {
-            com_x[i,] <- x-x[i]
-            com_y[i,] <- y-y[i]
             dis[i,] <- sqrt((x-x[i])^2+(y-y[i])^2)
+            print(i)
         }
 
         h <- rep(0,n)
@@ -68,29 +62,33 @@ polygon_enumerating <- function(pol, idp = NULL){
 
         while (min(h)==0){
             i=i+1
-            aux <- colSums(rbind(A[h != 0, ],
-                                 rep(0, n)))
-
-            boun <- c(1:dim(A)[2])[aux >=1]
-
-            if(length(boun)!=0){
-                pol_1 <- boun[match(max(com_y[pol_0,boun]),com_y[pol_0,boun])]
+            aux <- (1:n)[A[pol_0,] > 0 & h == 0]
+            if(length(aux) == 1){
+                aux1 <- sum(A[aux, h != 0])
+            }else{
+                aux1 <- rowSums(as.matrix(cbind(A[aux, h != 0], rep(0, length(aux)))))
             }
-            else{
-                pol_1 <- match(max(y),y)
+
+            boun <- aux
+            if(length(boun)!=0){
+                apo <- rowSums(matrix(A[boun, h == 0], nrow = length(boun), ncol = sum(h == 0)))
+                boun <- boun[match(min(apo), apo)]
+                pol_1 <- boun[match(max(y[boun]),y[boun])]
+            }else{
+                boun <- (1:n)[colSums(rbind(A[h > 0, ]), rep(0, n)) > 0]
+                pol_1 <- boun[match(min(dis[pol_0, boun]), dis[pol_0, boun])]
             }
             y[pol_1]=min(y)-1
-            A[pol_0,]=0
-            A[,pol_0]=0
+
             pol_0=pol_1
             h[pol_0]=i
-            print(pol_0)
+            A[h!=0,h!=0]=0
         }
-        polnum <- cbind(pol,order=h) %>%
+        polnum <- cbind(pol |>  arrange(id),order=h) %>%
             rename({{idp}} := id)
     }
     if(n==1){
-        polnum <- cbind(pol,order=1) %>%
+        polnum <- cbind(pol |>  arrange(id),order=1) %>%
             rename({{idp}} := id)
     }
     return(polnum)
